@@ -19,14 +19,14 @@ public class Profile {
 	public Profile() {
 		super();
 	}
-	
+
 	public Profile(String userName, String userPassword, String userType) {
 		super();
 		this.username = userName;
 		this.password = userPassword;
 		this.type = userType;
 	}
-	
+
 	public Profile(String userName, String userPassword,
 			String userType, String fName, String lName, String sex,
 			String birthdate, String city, String state, int zipcode, String telephone, String email) {
@@ -45,7 +45,7 @@ public class Profile {
 		this.email = email;
 	}
 
-	
+
 
 	public String getUsername() {
 		return username;
@@ -166,7 +166,3 @@ public class Profile {
 	}
 
 }
-	
-	
-	
-	
