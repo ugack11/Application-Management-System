@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package dbHelpers;
 
@@ -12,32 +12,32 @@ import java.sql.SQLException;
 import model.*;
 
 public class LoginCheck {
-	
+
 	private Connection connection;
 	private ResultSet results;
-	
+
 	private Profile profile = new Profile();
 	private String username;
 	private String password;
-	
+
 	public LoginCheck(String dbName, String uname, String pwd, String username, String password){
 		System.out.println("Login Check Object Created");
 		String url = "jdbc:mysql://localhost:3306/" + dbName;
 		this.username = username;
 		this.password = password;
-		
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			this.connection = DriverManager.getConnection(url, uname, pwd);
-			
+
 		} catch (InstantiationException | IllegalAccessException
 				| ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public boolean doCheck(){
 		System.out.println("Begining Login Check");
 		String query = "SELECT * FROM profile WHERE username = '" + this.username + "' AND password = '" + this.password + "'";
@@ -47,7 +47,7 @@ public class LoginCheck {
 			PreparedStatement ps = connection.prepareStatement(query);
 			this.results = ps.executeQuery();
 			this.results.next();
-			
+
 			if(this.results != null) {
 				profile.setUsername(this.results.getString("username"));
 				profile.setPassword(this.results.getString("password"));
@@ -63,7 +63,7 @@ public class LoginCheck {
 				profile.setTelephone(this.results.getString("telephone"));
 				profile.setEmail(this.results.getString("email"));
 				profile.setApplication(this.results.getString("application"));
-				
+
 				bool = true;
 			} else {
 				bool = false;
@@ -74,10 +74,10 @@ public class LoginCheck {
 		}
 		return bool;
 	}
-	
+
 	public Profile getProfile() {
 		return this.profile;
-	}	
+	}
 
 }
 

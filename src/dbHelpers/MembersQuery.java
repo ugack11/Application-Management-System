@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package dbHelpers;
 
@@ -13,13 +13,13 @@ import model.*;
 
 
 public class MembersQuery {
-	
+
 	private Connection connection;
 	private ResultSet results;
-	
+
 	public MembersQuery(String dbName, String uname, String pwd){
 		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		
+
 		// set up the driver
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -38,10 +38,10 @@ public class MembersQuery {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void doRead() {
 		String query = "SELECT * FROM profile";
-		
+
 		try {
 			PreparedStatement ps = this.connection.prepareStatement(query);
 			this.results= ps.executeQuery();
@@ -50,10 +50,10 @@ public class MembersQuery {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void doFilteredRead(String column, String operator, String value){
 		String query = "select * from profile where " + column + operator + value;
-		
+
 		try {
 			PreparedStatement ps = this.connection.prepareStatement(query);
 			this.results= ps.executeQuery();
@@ -62,13 +62,13 @@ public class MembersQuery {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getHTMLTable(){
 		String table ="";
 		table += "<table border=1>";
-		
+
 		//
-		
+
 		table += "<tr>";
 			table += "<th>";
 				table += "Username";
@@ -78,7 +78,7 @@ public class MembersQuery {
 			table += "</th>";
 			table += "<th>";
 				table += "Type";
-			table += "</th>";	
+			table += "</th>";
 			table += "<th>";
 				table += "First Name";
 			table += "</th>";
@@ -113,9 +113,9 @@ public class MembersQuery {
 				table += "Application";
 			table += "</th>";
 		table += "</tr>";
-	
+
 		//Add User Table Row
-		
+
 		table += "<form action='addUser'><tr>";
 			table += "<td>";
 				table += "<input class='input' type='text' name='username'>";
@@ -125,7 +125,7 @@ public class MembersQuery {
 			table += "</td>";
 			table += "<td>";
 				table += "<input class='input' type='text' name='type'>";
-			table += "</td>";	
+			table += "</td>";
 			table += "<td>";
 				table += "<input class='input' type='text' name='fName'>";
 			table += "</td>";
@@ -161,11 +161,11 @@ public class MembersQuery {
 			table += "</td>";
 		table += "</tr></form>";
 		Profile profile;
-		
-		
+
+
 		try {
 			while(this.results.next()){
-				
+
 				profile = new Profile();
 				profile.setUsername(this.results.getString("username"));
 				profile.setPassword(this.results.getString("password"));
@@ -181,8 +181,8 @@ public class MembersQuery {
 				profile.setTelephone(this.results.getString("telephone"));
 				profile.setEmail(this.results.getString("email"));
 				profile.setApplication(this.results.getString("application"));
-				
-				
+
+
 				table +="<tr>";
 					table +="<td>";
 						table += profile.getUsername();
@@ -231,7 +231,7 @@ public class MembersQuery {
 						table += "<a href=delete?username=" + profile.getUsername() + "><button class='input'>delete</button></a>";
 					table +="</td>";
 				table +="</tr>";
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -240,8 +240,8 @@ public class MembersQuery {
 		table += "</table>";
 		return table;
 	}
-	
-	
-	
+
+
+
 
 }

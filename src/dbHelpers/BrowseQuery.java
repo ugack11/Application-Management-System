@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package dbHelpers;
 
@@ -13,13 +13,13 @@ import model.*;
 
 
 public class BrowseQuery {
-	
+
 	private Connection connection;
 	private ResultSet results;
-	
+
 	public BrowseQuery(String dbName, String uname, String pwd){
 		String url = "jdbc:mysql://localhost:3306/" + dbName;
-		
+
 		// set up the driver
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -38,7 +38,7 @@ public class BrowseQuery {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void doRead() {
 		String query = "select * from profile";
 		System.out.println(query);
@@ -50,11 +50,11 @@ public class BrowseQuery {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void doFilteredRead(String column, String value){
 		String query = "select * from profile where " + column + "='" + value + "'";
 		System.out.println(query);
-		
+
 		try {
 			PreparedStatement ps = this.connection.prepareStatement(query);
 			this.results = ps.executeQuery();
@@ -63,11 +63,11 @@ public class BrowseQuery {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getHTMLTable(){
 		String table ="";
 		table += "<table border=1><tr><td>First Name</td><td>Last Name</td><td>Type</td><td>Sex(M/F)</td><td>Birth Date(MM/DD/YYYY)</td><td>Mailing Address</td><td>City</td><td>State</td><td>Zip Code</td><td>Telephone(XXX-XXX-XXXX)</td><td>E-mail</td><td>Application</td></tr>";
-		
+
 		try {
 			while(this.results.next()){
 				Profile profile = new Profile();
@@ -83,7 +83,7 @@ public class BrowseQuery {
 				profile.setTelephone(this.results.getString("telephone"));
 				profile.setEmail(this.results.getString("email"));
 				profile.setApplication(this.results.getString("application"));
-				
+
 				table +="<tr>";
 					table +="<td>";
 						table += profile.getFirstName();
@@ -122,18 +122,18 @@ public class BrowseQuery {
 						table += "<a href='/Gym_Sign_Up/applications/" + profile.getApplication() + "' target='_'><button class='input'>View</button></a>";
 					table += "</td>";
 				table +="</tr>";
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		table += "</table>";
 		return table;
 	}
-	
-	
-	
+
+
+
 
 }
