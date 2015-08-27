@@ -1,0 +1,65 @@
+@CHARSET "UTF-8";
+
+html {
+	background-color: #808080;
+}
+
+h2 {
+	color: #000080;
+	text-align: center;
+}
+
+
+.input {
+    background-color: #408080;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius:7px;
+    color: #8dcdac;
+    font-family: 'Oswald';
+    font-size: 15px;
+    text-decoration: none;
+    cursor: poiner;
+    border: 2px solid #41ccac;
+}
+
+
+.input:hover {
+    background: #008040;
+    box-shadow: 0px 0px 0px #589490;
+}
+
+#menu {
+	margin: 0 auto;
+	width: 420px;
+	left: 50%;
+	top-margin: 30px;
+	bottom-margin: 30px;
+}
+
+#menu div {
+	display: inline-table;
+ 	white-space: nowrap;
+ 	align-content: center;
+}
+
+#menu form{
+	display: inline-table;
+}
+
+#settingForm {
+	margin: 0 auto;
+	width: 400px;
+	left: 50%;
+}
+
+#settingForm div label{
+	width:180px;
+    clear:both;
+    /*text-align:left;*/
+    padding-right:30px;
+}
+#settingForm div label, input{
+	/*float: right;*/
+}
+
