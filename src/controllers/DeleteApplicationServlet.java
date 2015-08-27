@@ -19,7 +19,7 @@ import dbHelpers.UploadQuery;
 @WebServlet("/DeleteApplicationServlet")
 public class DeleteApplicationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,16 +42,16 @@ public class DeleteApplicationServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Profile profile = (Profile) session.getAttribute("profile");
 		profile.setApplication("");
-		
+
 		String username = profile.getUsername();
-		
+
 		UploadQuery uq = new UploadQuery("application", "root", "", username);
 		uq.doUpload("");
-		
+
 		session.setAttribute("profile", profile);
-		
+
 		String url = "/settings.jsp";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

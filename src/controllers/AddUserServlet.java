@@ -16,7 +16,7 @@ import dbHelpers.AddUserQuery;
 @WebServlet(description = "Deletes a record for a particular sku", urlPatterns = { "/addUser" })
 public class AddUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -49,17 +49,17 @@ public class AddUserServlet extends HttpServlet {
 		int zipcode = Integer.parseInt(request.getParameter("zipcode"));
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
-		
-		
-		
+
+
+
 		AddUserQuery auq = new AddUserQuery("application", "root", "");
 		auq.doAdd(username, password, type, fName, lName, sex, birthdate, maddress, city, state, zipcode, telephone, email);
-		
+
 		String url = "/members";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
+
 	}
 
 }

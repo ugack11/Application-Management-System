@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import dbHelpers.BrowseQuery;
 
 @WebServlet(
-		description = "Controller for reading the profile table", 
-		urlPatterns = { 
-				"/BrowseServlet", 
+		description = "Controller for reading the profile table",
+		urlPatterns = {
+				"/BrowseServlet",
 				"/browse"
 		})
 public class BrowseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,19 +39,17 @@ public class BrowseServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BrowseQuery bq = new BrowseQuery("application", "root", "");
-		
-		
+
         bq.doRead();
-        
-		
+
 		String table = bq.getHTMLTable();
-		
+
 		request.setAttribute("table", table);
 		String url = "/browse.jsp";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
+
 	}
 
 }

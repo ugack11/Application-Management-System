@@ -20,7 +20,7 @@ import dbHelpers.ReadRecord;
 @WebServlet(description = "Controller which starts the actual book update to the database", urlPatterns = { "/updateMember" })
 public class UpdateMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,14 +39,14 @@ public class UpdateMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 
 		String username = request.getParameter("username");
-		
+
 		ReadRecord rr = new ReadRecord("application", "root", "", username);
 		rr.doRead();
 		Profile userProfile = rr.getProfile();
-		
+
 		request.setAttribute("username", userProfile.getUsername());
 		request.setAttribute("password", userProfile.getPassword());
 		request.setAttribute("type", userProfile.getType());
@@ -60,12 +60,12 @@ public class UpdateMemberServlet extends HttpServlet {
 		request.setAttribute("zipcode", userProfile.getZipCode());
 		request.setAttribute("telephone", userProfile.getTelephone());
 		request.setAttribute("email", userProfile.getEmail());
-				
+
 		String url = "/updateMember.jsp";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
+
 	}
 
 }

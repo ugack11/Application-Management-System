@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class DownloadServlet
  */
 @WebServlet(
-		description = "Controller for reading the profile table", 
-		urlPatterns = { 
-				"/DownloadServlet", 
+		description = "Controller for reading the profile table",
+		urlPatterns = {
+				"/DownloadServlet",
 				"/download"
 		})
 public class DownloadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */

@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SettingsServlet
  */
 @WebServlet(
-		description = "Controller for reading the profile table", 
-		urlPatterns = { 
-				"/SettingsServlet", 
+		description = "Controller for reading the profile table",
+		urlPatterns = {
+				"/SettingsServlet",
 				"/settings"
 		})
 public class SettingsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */

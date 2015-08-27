@@ -19,7 +19,7 @@ import dbHelpers.UpdateQuery;
 @WebServlet(description = "Controller which starts the actual book update to the database", urlPatterns = { "/updateProfile" })
 public class UpdateProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -51,9 +51,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		int zipcode = Integer.parseInt(request.getParameter("zipcode"));
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
-		
-		
-				
+
 		Profile profile = new Profile();
 		profile.setUsername(username);
 		profile.setPassword(password);
@@ -69,18 +67,18 @@ public class UpdateProfileServlet extends HttpServlet {
 		profile.setTelephone(telephone);
 		profile.setEmail(email);
 
-		
+
 		UpdateQuery uq = new UpdateQuery("application", "root", "");
 		if(uq.doUpdate(profile) ==  true) {
 			HttpSession session = request.getSession();
 			session.setAttribute("profile", profile);
 		}
-		
+
 		String url = "/settings";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
+
 	}
 
 }

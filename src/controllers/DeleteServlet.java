@@ -17,7 +17,7 @@ import dbHelpers.DeleteQuery;
 @WebServlet(description = "Deletes a record for a particular sku", urlPatterns = { "/delete" })
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,13 +39,12 @@ public class DeleteServlet extends HttpServlet {
 
 		String username = request.getParameter("username");
 		DeleteQuery dq = new DeleteQuery("application", "root", "", username);
-		
+
 		dq.doDelete();
 		String url = "/members";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
-		
 	}
 
 }

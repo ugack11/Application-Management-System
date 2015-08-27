@@ -22,11 +22,11 @@ import dbHelpers.UploadQuery;
  * Servlet implementation class ImageServlet
  */
 @WebServlet("/UploadServlet")
-@MultipartConfig            
+@MultipartConfig
 public class UploadServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -48,29 +48,29 @@ public class UploadServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Profile profile = (Profile) session.getAttribute("profile");
-		
-		String username = profile.getUsername();	
-				
-		Part filePart = request.getPart("file"); 
-		InputStream filecontent = filePart.getInputStream();  
+
+		String username = profile.getUsername();
+
+		Part filePart = request.getPart("file");
+		InputStream filecontent = filePart.getInputStream();
 		String path = session.getServletContext().getRealPath("/applications");
 		String filename = getFilename(filePart);
 		String fullPath = path + "/" + filename;
 		copyStream(filecontent, fullPath);
-				
+
 		profile.setUsername(username);
-		
-		
+
+
 		UploadQuery uq = new UploadQuery("application", "root", "", username);
 		if(uq.doUpload(filename) ==  true) {
 			profile.setApplication(filename);
 			session.setAttribute("profile", profile);
 		}
-		
+
 		System.out.println(profile.toString());
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/application.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
 
 	/*
@@ -104,9 +104,9 @@ public class UploadServlet extends HttpServlet {
 		    }
 		    output.close();
 		}
-	
-	
+
+
 	// http://stackoverflow.com/questions/2422468/how-to-upload-files-to-server-using-jsp-servlet/2424824#2424824
-	
-	
+
+
 }

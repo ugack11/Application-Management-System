@@ -18,7 +18,7 @@ import dbHelpers.AddQuery;
 @WebServlet("/AddServlet")
 public class AddServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -70,7 +70,7 @@ public class AddServlet extends HttpServlet {
 		profile.setEmail(email);
 		//set up an addquery object
 		AddQuery aq = new AddQuery("application","root","");
-		
+
 		//pass the book to addquery to add to the database
 		aq.doAdd(profile);
 		//pass execution control to the BrowseServlet

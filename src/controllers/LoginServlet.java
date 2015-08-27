@@ -17,9 +17,9 @@ import model.*;
  * Servlet implementation class HomeServlet
  */
 @WebServlet(
-		description = "Controller for reading the profile table", 
-		urlPatterns = { 
-				"/LoginServlet", 
+		description = "Controller for reading the profile table",
+		urlPatterns = {
+				"/LoginServlet",
 				"/login"
 		})
 public class LoginServlet extends HttpServlet {
@@ -27,9 +27,9 @@ public class LoginServlet extends HttpServlet {
 	private HttpSession session;
 	private int loginAttempts;
 	private String url;
-	private Profile profile; 
+	private Profile profile;
 	private String adminTestString = "admin";
-	
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -53,15 +53,15 @@ public class LoginServlet extends HttpServlet {
 		String account = request.getParameter("account");							//Either 'login' or 'create'
 		String testVariable = "login";
 		this.session = request.getSession();
-		
+
 		//String encryptPassword =  Integer.toString(password.hashCode());
-		
-		
-		
+
+
+
         /*if(session.getAttribute("loginAttempts") == null){							//get the number of logins
             loginAttempts = 0;
         }*/
-        
+
         if(loginAttempts > 2){														//exceeded logins
             String errorMessage = "<div><p>Error: Number of Login Attempts Exceeded</p></div>";
             request.setAttribute("errorMessage", errorMessage);
@@ -69,29 +69,29 @@ public class LoginServlet extends HttpServlet {
         } else {
         	if(account.equals(testVariable)) {
 				LoginCheck lc = new LoginCheck("application","root", "", username, password);
-		
+
 				if(lc.doCheck() == true) {
-					
+
 					profile = lc.getProfile();
 					//this.session = request.getSession(); <-- called at the top to prevent "!" on dynamic web project.
 					session.setAttribute("profile", profile);
 					if(profile.getType().equals(adminTestString)){url = "/browse";} else {url = "/settings";}
 				} else {
 					url = "/index.jsp";
-					
+
 					//track login attempts (combats: brute force attacks)
 		        	//session.setAttribute("loginAttempts", loginAttempts++);
 					loginAttempts++;
 		        	String errorMessage = "<div><p>Error: Unrecognized Username or Password, You have " + (3-loginAttempts) + " Login Attempts Left</p></div>";
 		        	request.setAttribute("errorMessage", errorMessage);
 				}
-			
+
 			} else {
-				
+
 				url = "/AddAccountServlet";
 			}
         }
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

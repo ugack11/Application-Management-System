@@ -18,7 +18,7 @@ import model.Profile;
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -42,7 +42,7 @@ public class LogoutServlet extends HttpServlet {
 		Profile profile = new Profile();
 		HttpSession session = request.getSession();
 		session.setAttribute("profile", profile);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

@@ -18,7 +18,7 @@ import dbHelpers.UpdateFormQuery;
 @WebServlet(description = "Controller which starts the actual book update to the database", urlPatterns = { "/updateForm" })
 public class UpdateFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -37,7 +37,7 @@ public class UpdateFormServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String type = request.getParameter("type");
@@ -51,15 +51,15 @@ public class UpdateFormServlet extends HttpServlet {
 		int zipcode = Integer.parseInt(request.getParameter("zipcode"));
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
-		
-		
-		
-		
+
+
+
+
 		UpdateFormQuery umq = new UpdateFormQuery("application", "root", "");
 		umq.doUpdate(username, password, type, fName, lName, sex, birthdate, maddress, city, state, zipcode, telephone, email);
 
 		String url = "/members";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

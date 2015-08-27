@@ -14,14 +14,14 @@ import dbHelpers.MembersQuery;
  * Servlet implementation class MembersServlet
  */
 @WebServlet(
-		description = "Controller for reading the profile table", 
-		urlPatterns = { 
-				"/MembersServlet", 
+		description = "Controller for reading the profile table",
+		urlPatterns = {
+				"/MembersServlet",
 				"/members"
 		})
 public class MembersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -45,10 +45,10 @@ public class MembersServlet extends HttpServlet {
 		MembersQuery mq = new MembersQuery("application", "root", "");
 		mq.doRead();
 		String table = mq.getHTMLTable();
-		
+
 		request.setAttribute("table", table);
 		String url = "/members.jsp";
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 		dispatcher.forward(request, response);
 	}

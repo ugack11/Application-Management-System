@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(description = "Controller for adding a new item to the database", urlPatterns = { "/AddAccountServlet" })
 public class AddAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,7 +39,7 @@ public class AddAccountServlet extends HttpServlet {
 	String url = "/Add.jsp";
 	RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 	dispatcher.forward(request,response);
-			
+
 	}
 
 }
